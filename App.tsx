@@ -7,6 +7,7 @@ import {
   Text,
   View,
   Image,
+  Pressable,
 } from 'react-native';
 
 import {List} from 'react-native-paper';
@@ -14,8 +15,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faPizzaSlice} from '@fortawesome/free-solid-svg-icons';
 import {faHamburger} from '@fortawesome/free-solid-svg-icons';
 import {faCake} from '@fortawesome/free-solid-svg-icons';
+import {faThumbsUp} from '@fortawesome/free-solid-svg-icons';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 600,
+    };
+  }
+
   recipes = [
     {
       id: 1,
@@ -95,7 +104,19 @@ class App extends React.Component {
           </View>
         </ScrollView>
         <View style={styles.footer}>
-          <Text style={{color: 'white'}}>Desenvolvido por Flávio Caruso</Text>
+          <Text style={{color: 'white'}}>
+            Curta nosso APP:
+            <Pressable
+              onPress={() => this.setState({count: this.state.count + 1})}>
+              <FontAwesomeIcon
+                style={{color: '#55baed', marginLeft: 10}}
+                icon={faThumbsUp}
+              />
+            </Pressable>
+          </Text>
+          <Text style={{color: 'white'}}>
+            Nosso APP tem {this.state.count} curtidas.
+          </Text>
         </View>
       </SafeAreaView>
     );
@@ -145,9 +166,9 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'center',
-    height: 40,
-    backgroundColor: 'grey',
-    justifyContent: 'center',
+    height: 70,
+    backgroundColor: '#333232',
+    justifyContent: 'space-around',
   },
 });
 
